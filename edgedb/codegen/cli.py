@@ -52,6 +52,11 @@ parser.add_argument(
     default=["async"],
     help="Choose one or more targets to generate code (default is async)."
 )
+parser.add_argument(
+    "--no-annotations",
+    action="store_true",
+    help="Disable PEP 563 future annotations (default is false)."
+)
 if sys.version_info[:2] >= (3, 9):
     parser.add_argument(
         "--skip-pydantic-validation",

@@ -124,6 +124,7 @@ class Generator:
         self._targets = args.target
         self._skip_pydantic_validation = args.skip_pydantic_validation
         self._async = False
+        self._no_annotations = args.no_annotations
         try:
             self._project_dir = pathlib.Path(
                 find_edgedb_project_dir()
@@ -256,7 +257,8 @@ class Generator:
         print(file=f)
 
     def _write_definitions(self, f: io.TextIOBase):
-        print("from __future__ import annotations", file=f)
+        if not self._no_annotations:
+            print("from __future__ import annotations", file=f)
         for m in sorted(self._imports):
             print(f"import {m}", file=f)
         print(file=f)
